@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Race Info</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg" padding>
+
+  <p *ngFor="let race of data" class="no-margin">
+  
+<ion-card>
+  <ion-card-header>
+    RS:X Men Race 1
+  </ion-card-header>
+
+  <ion-card-content>
+  </ion-card-content>
+
+  <ion-list>
+    <button ion-item>
+      <ion-icon name="ios-navigate" item-start></ion-icon>
+      Course
+    </button>
+
+  </ion-list>
+
+  <ion-item>
+    <span item-left>Ongoing</span>
+    <span item-left>2' 34''</span>
+    <button ion-button icon-left clear item-end>
+      <ion-icon name="ios-navigate"></ion-icon>
+      Tracking
+    </button>
+  </ion-item>
+
+</ion-card>
+
+  </p>
+  
+</ion-content>
