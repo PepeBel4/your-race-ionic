@@ -2,6 +2,9 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { RaceInfoPage } from '../pages/raceinfo/raceinfo';
 import { StartPage } from '../pages/start/start';
@@ -19,6 +22,22 @@ import { HttpModule } from '@angular/http';
 import { CompetitionService } from '../services/competition.service';
 import { RaceService } from '../services/race.service';
 
+import { Facebook } from '@ionic-native/facebook'
+import { GooglePlus } from '@ionic-native/google-plus'
+import { TwitterConnect } from '@ionic-native/twitter-connect'
+
+// diretives and providers
+import { Loader } from '../providers/loader';
+import { Nl2br } from '../pipes/nl2br';
+import { AuthenticatorService } from '../providers/authenticator';
+
+// Authentication
+import { LoginPage } from '../pages/authentication/login/login';
+import { RegistrationPage } from '../pages/authentication/registration/registration';
+
+
+import { Config } from './config'
+
 @NgModule({
   declarations: [
     MyApp,
@@ -27,12 +46,15 @@ import { RaceService } from '../services/race.service';
     FinishPage,
     WeatherPage,
     SettingsPage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    RegistrationPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    AngularFireModule.initializeApp(Config.FIREBASE_CONFIG)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,14 +64,24 @@ import { RaceService } from '../services/race.service';
     FinishPage,
     WeatherPage,
     SettingsPage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    RegistrationPage,
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CompetitionService,
-    RaceService
+    RaceService,
+    Loader,
+    Facebook,
+    GooglePlus,
+    TwitterConnect,
+    AngularFireAuth,
+    AngularFireDatabase,
+    AuthenticatorService
   ]
 })
 export class AppModule {}
