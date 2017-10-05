@@ -34,6 +34,14 @@ import { AuthenticatorService } from '../providers/authenticator';
 import { LoginPage } from '../pages/authentication/login/login';
 import { RegistrationPage } from '../pages/authentication/registration/registration';
 
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { Http, RequestOptions } from '@angular/http';
+ 
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    tokenGetter: (() => localStorage.getItem('access_token'))
+  }), http, options);
+}
 
 import { Config } from './config'
 
@@ -80,7 +88,12 @@ import { Config } from './config'
     TwitterConnect,
     AngularFireAuth,
     AngularFireDatabase,
-    AuthenticatorService
+    AuthenticatorService,
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
   ]
 })
 export class AppModule {}
