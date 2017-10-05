@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { NavController } from 'ionic-angular';
 
-import { Race } from '../../services/race';
 import { RaceService } from '../../services/race.service';
 
 @Component({

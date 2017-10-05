@@ -37,32 +37,7 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      // Verify if user is logged in
-      this.auth.authState.subscribe(user => {
-        if (user) {
-          console.info("Authenticated - pushing menu");
-          authenticatorService.setUser(user);
-          this.rootPage = TabsPage;
-        } else {
-          console.info("User not logged in");
-          authenticatorService.invalidateUser();
-          this.rootPage = LoginPage;
-        }
-      });
-
-      // Available events for Authentication
-      this.events.subscribe('user:login', user => {
-        console.info("This was trigger by the user:login event.");
-      });
-
-      this.events.subscribe('user:create', user => {
-        console.info("This was trigger by the user:create event.");
-      });
-
-      this.events.subscribe('user:resetPassword', user => {
-        console.info("This was trigger by the user:resetPassword event.");
-      });
-
+      this.rootPage = TabsPage;
 
 
 

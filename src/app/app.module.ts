@@ -28,7 +28,6 @@ import { TwitterConnect } from '@ionic-native/twitter-connect'
 
 // diretives and providers
 import { Loader } from '../providers/loader';
-import { Nl2br } from '../pipes/nl2br';
 import { AuthenticatorService } from '../providers/authenticator';
 
 // Authentication

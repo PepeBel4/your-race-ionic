@@ -3,7 +3,7 @@ import { ModalController, NavController, Platform } from 'ionic-angular';
 import { Validators, FormBuilder } from '@angular/forms';
 import { AuthenticatorService } from "../../../providers/authenticator";
 import { RegistrationPage } from '../registration/registration';
-import { AlertController, Events } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 /*
   Generated class for the Login page.
@@ -17,7 +17,6 @@ export class LoginPage {
   userFormBuilder: any;
 
   constructor(
-    private events: Events,
     public navCtrl: NavController,
     public modalController: ModalController,
     private formBuilder: FormBuilder,
