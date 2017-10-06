@@ -8,9 +8,11 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 import { RaceInfoPage } from '../pages/raceinfo/raceinfo';
 import { StartPage } from '../pages/start/start';
+import { StartStep2Page } from '../pages/start/start_step2';
 import { FinishPage } from '../pages/finish/finish';
 import { WeatherPage } from '../pages/weather/weather';
 import { SettingsPage } from '../pages/settings/settings';
+
 
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -18,6 +20,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpModule } from '@angular/http';
+
+import { ApplicationService } from '../services/application.service';
 
 import { CompetitionService } from '../services/competition.service';
 import { RaceService } from '../services/race.service';
@@ -62,6 +66,7 @@ export class RavenErrorHandler implements ErrorHandler {
     MyApp,
     RaceInfoPage,
     StartPage,
+    StartStep2Page,
     FinishPage,
     WeatherPage,
     SettingsPage,
@@ -80,6 +85,7 @@ export class RavenErrorHandler implements ErrorHandler {
     MyApp,
     RaceInfoPage,
     StartPage,
+    StartStep2Page,
     FinishPage,
     WeatherPage,
     SettingsPage,
@@ -92,6 +98,7 @@ export class RavenErrorHandler implements ErrorHandler {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ApplicationService,
     CompetitionService,
     RaceService,
     Loader,

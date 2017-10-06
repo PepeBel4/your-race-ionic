@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Start
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+	STEP 2
+
+	 <p *ngFor="let race of data" class="no-margin">
+  
+	<ion-item>
+  <ion-label> {{ race.group.name }} | {{ race.fleet.name }} | {{ race.name }}</ion-label>
+  <ion-toggle checked="false"></ion-toggle>
+</ion-item>
+
+</p>
+
+<p>
+
+<button (click)="updateData()" ion-button full>Update Start information</button>
+
+</p>
+
+</ion-content>

@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { NavController } from 'ionic-angular';
 
-import { StartStep2Page } from './start_step2';
+import { SettingsPage } from '../settings/settings';
 
 import { RaceService } from '../../services/race.service';
 
 @Component({
-  selector: 'page-start',
-  templateUrl: 'start.html'
+  selector: 'page-start-step2',
+  templateUrl: 'start_step2.html'
 })
 
-export class StartPage implements OnInit {
+export class StartStep2Page implements OnInit {
+
+  settingsPage = SettingsPage;
 
   public data: any[];
   errorMessage: string;
@@ -30,8 +32,9 @@ export class StartPage implements OnInit {
 		this.sub = this.timer.subscribe(() => this.getRacesOpen());   
     }
 
-  navigateStep2(){
-  	this.navCtrl.push(StartStep2Page);
+  updateData(){
+  	console.log("WE ARE HERE!!!!!!");
+  	//this.navCtrl.push(SettingsPage);
   }
 
   getRacesOpen() {
