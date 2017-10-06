@@ -36,6 +36,8 @@ import { RegistrationPage } from '../pages/authentication/registration/registrat
 
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
+
+import * as Raven from 'raven-js';
  
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -44,6 +46,16 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 }
 
 import { Config } from './config'
+
+Raven
+  .config('https://ca08b3ce0dc847c69307fa31feabceb7@sentry.io/226992')
+  .install();
+
+export class RavenErrorHandler implements ErrorHandler {
+  handleError(err:any) : void {
+    Raven.captureException(err);
+  }
+}
 
 @NgModule({
   declarations: [

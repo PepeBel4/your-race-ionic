@@ -32,6 +32,7 @@ export class AuthenticatorService {
   // Set user in this singleton to be used thru the app
   setUser(user): void {
     console.log("NOW SETTING THE USER!!!!");
+      console.log(this.afAuth.auth.currentUser.getIdToken());
       this.afAuth.auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
         console.log(idToken);
         localStorage.setItem('access_token',idToken);
