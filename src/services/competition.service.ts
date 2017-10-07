@@ -23,7 +23,7 @@ export class CompetitionService {
 	}
 
 	getCompetition(id: number) {
-		return this.http.get(this.competitionsUrl + 'competitions/ +id);
+		return this.http.get(this.competitionsUrl + 'competitions/' +id);
 	}
 
 	setSelectedCompetition(competition: Competition) {
