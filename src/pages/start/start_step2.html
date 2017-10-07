@@ -16,7 +16,7 @@
   <button (click)="updateData()" ion-button full>Start countdown</button>
 
 <ion-segment [(ngModel)]="relationship" color="primary">
-    <ion-segment-button value="in_progress">
+    <ion-segment-button value="in_progress" (click)="changeState('in_progress')">
       In progress
     </ion-segment-button>
     <ion-segment-button value="postponed">
@@ -50,7 +50,7 @@ TEXT A
       </ion-card-header>
 
     <ion-card-content>
-       <br/>
+        {{ selectedRace.aasm_state | uppercase }} <br/>
         {{ selectedRace.scheduled_for }} <br/>
         {{ currentTime }} <br/>
         {{ selectedRace.ongoingFor }}

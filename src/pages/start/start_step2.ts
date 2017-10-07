@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { NavController } from 'ionic-angular';
-
 import { SettingsPage } from '../settings/settings';
-
 import { RaceService } from '../../services/race.service';
-
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -60,6 +57,22 @@ export class StartStep2Page implements OnInit {
     			races => this.data = races,
     			error => this.errorMessage = <any>error
     		);
+   }
+
+   updateRace(race) {
+       this.raceService.updateRace(race)
+        .subscribe(
+          response => console.log(response),
+          error => this.errorMessage = <any>error
+        );
+   } 
+
+   changeState(state) {
+     console.log(state);
+     console.log(this.selectedRaces[0]);
+     console.log('--------------------------------------------');
+     this.selectedRaces[0].aasm_state = state;
+     this.updateRace(this.selectedRaces[0]);
    }
 
 }

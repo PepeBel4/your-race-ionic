@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
-import { Http, Response } from '@angular/http';
+import { Http, RequestOptions, Response, Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
 import { Race } from './race';
@@ -24,6 +24,17 @@ export class RaceService  {
 		return this.authHttp.get(this.apiUrl + 'races/open')
 						.map((response: Response) => <Race[]>response.json())
 						.catch(this.handleError);
+	}
+
+	updateRace(race) {
+		console.log('will now update the race too');
+		console.log(race);
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let options = new RequestOptions({ headers: headers });
+
+		console.log(JSON.stringify(race));
+		return this.authHttp.patch(this.apiUrl + 'races/' + race.id, JSON.stringify(race), {
+			headers: headers}).map((res: Response) => res.json());
 	}
 
 	private handleError(error: Response | any) {

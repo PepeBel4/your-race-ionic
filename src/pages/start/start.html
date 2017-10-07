@@ -12,7 +12,7 @@
 	<form>
 
 		<ion-item *ngFor="let race of data" class="no-margin">
-  			<ion-label> {{ race.group.name }} | {{ race.fleet.name }} | {{ race.name }}</ion-label>
+  			<ion-label> {{ race.group.name }} | {{ race.fleet.name }} | {{ race.name }} ({{race.id}})</ion-label>
   			<ion-toggle (ionChange)="notify(race,$event)"></ion-toggle>
 		</ion-item>
 
