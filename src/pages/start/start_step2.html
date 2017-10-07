@@ -16,13 +16,13 @@
   <button (click)="updateData()" ion-button full>Start countdown</button>
 
 <ion-segment [(ngModel)]="relationship" color="primary">
-    <ion-segment-button value="in_progress" (click)="changeState('in_progress')">
+    <ion-segment-button disabled value="in_progress" (click)="changeState('in_progress')">
       In progress
     </ion-segment-button>
-    <ion-segment-button value="postponed">
+    <ion-segment-button value="postponed" (click)="changeState('postponed')">
       Postponed
     </ion-segment-button>
-    <ion-segment-button value="cancelled">
+    <ion-segment-button value="cancelled" (click)="changeState('cancelled')">
       Cancelled
     </ion-segment-button>
 
