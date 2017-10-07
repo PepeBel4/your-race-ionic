@@ -7,7 +7,7 @@ import { Competition } from './competition';
 
 @Injectable()
 export class CompetitionService {
-	private competitionsUrl = 'http://localhost:3001/competitions/';
+	private competitionsUrl = 'http://localhost:3001/';
 	competition: Competition;
 	public competitionChange:Subject<Competition> = new Subject();
 
@@ -17,13 +17,13 @@ export class CompetitionService {
 
 	getCompetitions(): Observable<Competition[]> {
 
-		return this.http.get(this.competitionsUrl)
+		return this.http.get(this.competitionsUrl + 'competitions/')
 						.map((response: Response) => <Competition[]>response.json())
 						.catch(this.handleError);
 	}
 
 	getCompetition(id: number) {
-		return this.http.get(this.competitionsUrl + id);
+		return this.http.get(this.competitionsUrl + 'competitions/ +id);
 	}
 
 	setSelectedCompetition(competition: Competition) {
@@ -32,13 +32,6 @@ export class CompetitionService {
         this.competitionChange.next(this.competition);
         console.log(this.competition);
     }
-
-	createCompetition(competition) {
-		let headers = new Headers({ 'Content-Type': 'application/json' });
-		let options = new RequestOptions({ headers: headers });
-		return this.http.post(this.competitionsUrl, JSON.stringify(competition), {
-			headers: headers}).map((res: Response) => res.json());
-	}
 
 	private handleError(error: Response | any) {
 		let errMsg: string;
