@@ -9,11 +9,11 @@
 <ion-content padding>
 
 	STEP1
-	<form [formGroup]="startFormBuilder" (ngSubmit)="login()">
+	<form>
 
 		<ion-item *ngFor="let race of data" class="no-margin">
   			<ion-label> {{ race.group.name }} | {{ race.fleet.name }} | {{ race.name }}</ion-label>
-  			<ion-toggle checked="false"></ion-toggle>
+  			<ion-toggle (ionChange)="notify(race,$event)"></ion-toggle>
 		</ion-item>
 
 	</form>

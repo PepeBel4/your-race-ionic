@@ -10,6 +10,7 @@ export class Race {
 		public ongoingFor?: number,
 		public finished_at?: Date,
 		public canceled_at?: Date,
-		public aasm?: string
+		public aasm?: string,
+		public isSelected: boolean = false
 	) {}
 }

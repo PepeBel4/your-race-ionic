@@ -4,7 +4,10 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content class="cards-bg" padding>
+
+<img class="logo" style="width:400px;padding:50px" src="./assets/yourrace.png">
 
   <p *ngFor="let race of data" class="no-margin">
   
@@ -18,19 +21,22 @@
 
   <ion-list>
     <button ion-item>
-      <ion-icon name="ios-navigate" item-start></ion-icon>
-      Course
+      <ion-icon color="primary" name="ios-navigate" item-start></ion-icon>
+      Inner Loop
     </button>
 
   </ion-list>
 
+<ion-item>
+  <ion-icon color="primary" name="ios-person" item-start></ion-icon>
+  Competitors
+  <ion-badge item-end>40</ion-badge>
+</ion-item>
+
   <ion-item>
-    <span item-left>Ongoing</span>
-    <span item-left>2' 34''</span>
-    <button ion-button icon-left clear item-end>
-      <ion-icon name="ios-navigate"></ion-icon>
-      Tracking
-    </button>
+    <ion-icon color="primary" name="ios-timer" item-start></ion-icon>
+    Ongoing 
+    <ion-badge item-end>2'34''</ion-badge>
   </ion-item>
 
 </ion-card>

@@ -21,7 +21,7 @@ export class RaceInfoPage implements OnInit {
   {}
 
   ngOnInit() {    
-		this.timer = Observable.timer(0,60000);  
+		this.timer = Observable.timer(2500,60000);  
 		this.sub = this.timer.subscribe(() => this.getRacesOpen());   
     }
 

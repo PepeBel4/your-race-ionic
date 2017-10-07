@@ -21,8 +21,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpModule } from '@angular/http';
 
-import { ApplicationService } from '../services/application.service';
-
 import { CompetitionService } from '../services/competition.service';
 import { RaceService } from '../services/race.service';
 
@@ -42,6 +40,8 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
 
 import * as Raven from 'raven-js';
+
+import { IonicStorageModule } from '@ionic/storage'
  
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -76,9 +76,10 @@ export class RavenErrorHandler implements ErrorHandler {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
     HttpModule,
-    AngularFireModule.initializeApp(Config.FIREBASE_CONFIG)
+    AngularFireModule.initializeApp(Config.FIREBASE_CONFIG),
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -98,7 +99,6 @@ export class RavenErrorHandler implements ErrorHandler {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ApplicationService,
     CompetitionService,
     RaceService,
     Loader,

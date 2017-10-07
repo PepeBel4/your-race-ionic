@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { RaceInfoPage } from '../raceinfo/raceinfo';
 import { StartPage } from '../start/start';
@@ -9,6 +9,7 @@ import { SettingsPage } from '../settings/settings';
 @Component({
   templateUrl: 'tabs.html'
 })
+
 export class TabsPage {
 
   tab1Root = RaceInfoPage;
@@ -17,7 +18,6 @@ export class TabsPage {
   tab4Root = WeatherPage;
   tab5Root = SettingsPage;
 
-  constructor() {
-
-  }
+  constructor(
+  ) {}
 }

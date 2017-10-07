@@ -8,21 +8,76 @@
 
 <ion-content padding>
 
-	STEP 2
-
-	 <p *ngFor="let race of data" class="no-margin">
-  
-	<ion-item>
-  <ion-label> {{ race.group.name }} | {{ race.fleet.name }} | {{ race.name }}</ion-label>
-  <ion-toggle checked="false"></ion-toggle>
+<ion-item>
+  <ion-label>Start Time</ion-label>
+  <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH mm ss"  [ngModel]="startTime">></ion-datetime>
 </ion-item>
+  
+  <button (click)="updateData()" ion-button full>Start countdown</button>
 
-</p>
+<ion-segment [(ngModel)]="relationship" color="primary">
+    <ion-segment-button value="in_progress">
+      In progress
+    </ion-segment-button>
+    <ion-segment-button value="postponed">
+      Postponed
+    </ion-segment-button>
+    <ion-segment-button value="cancelled">
+      Cancelled
+    </ion-segment-button>
 
-<p>
+</ion-segment>
 
-<button (click)="updateData()" ion-button full>Update Start information</button>
+TEXT A
 
-</p>
+  <ion-segment [(ngModel)]="relationship2" color="primary">
+    <ion-segment-button value="individual_recall">
+      Individual Recall
+    </ion-segment-button>
+     <ion-segment-button value="general_recall">
+      General Recall
+    </ion-segment-button>
+
+  </ion-segment>
+
+  TEXT B
+
+  <p *ngFor="let selectedRace of selectedRaces">
+
+    <ion-card>
+      <ion-card-header>
+        {{ selectedRace.name }}
+      </ion-card-header>
+
+    <ion-card-content>
+        {{ selectedRace.aasm.instance.aasm_state | uppercase }} <br/>
+        {{ selectedRace.scheduled_for }} <br/>
+        {{ currentTime }} <br/>
+        {{ selectedRace.ongoingFor }}
+    </ion-card-content>
+
+    <ion-list>
+      <button ion-item>
+        <ion-icon color="primary" name="ios-navigate" item-start></ion-icon>
+        Inner Loop
+      </button>
+    </ion-list>
+
+    <ion-item>
+      <ion-icon color="primary" name="ios-person" item-start></ion-icon>
+        Competitors
+      <ion-badge item-end>40</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon color="primary" name="ios-timer" item-start></ion-icon>
+        Ongoing 
+      <ion-badge item-end>2'34''</ion-badge>
+    </ion-item>
+
+    </ion-card>
+
+
+  </p>
 
 </ion-content>
