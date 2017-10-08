@@ -8,39 +8,47 @@
 
 <ion-content padding>
 
+  <ion-item>
+    <h1>{{ currentTime | date: 'HH:mm:ss' }}</h1>
+    <ion-badge>LOCAL TIME</ion-badge>
+  </ion-item>
+
 <ion-item>
-  <ion-label>Start Time</ion-label>
+  <ion-label>Start Countdown to</ion-label>
   <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH mm ss"  [ngModel]="startTime">></ion-datetime>
 </ion-item>
-  
-  <button (click)="updateData()" ion-button full>Start countdown</button>
 
-<ion-segment [(ngModel)]="relationship" color="primary">
-    <ion-segment-button disabled value="in_progress" (click)="changeState('in_progress')">
-      In progress
-    </ion-segment-button>
-    <ion-segment-button value="postponed" (click)="changeState('postponed')">
-      Postponed
-    </ion-segment-button>
-    <ion-segment-button value="cancelled" (click)="changeState('cancelled')">
-      Cancelled
-    </ion-segment-button>
+<ion-list radio-group>
+  <ion-list-header>
+    <h1>Race status</h1>
+  </ion-list-header>
 
-</ion-segment>
+  <ion-item>
+    <ion-label>In progress</ion-label>
+    <ion-radio checked="true" disabled value="in_progress"></ion-radio>
+  </ion-item>
 
-TEXT A
+  <ion-item>
+    <ion-label>General recall</ion-label>
+    <ion-radio value="recall" (click)="changeState('general_recall')"></ion-radio>
+  </ion-item>
 
-  <ion-segment [(ngModel)]="relationship2" color="primary">
-    <ion-segment-button value="individual_recall">
-      Individual Recall
-    </ion-segment-button>
-     <ion-segment-button value="general_recall">
-      General Recall
-    </ion-segment-button>
+  <ion-item>
+    <ion-label>Postponed</ion-label>
+    <ion-radio value="postponed" (click)="changeState('postponed')"></ion-radio>
+  </ion-item>
 
-  </ion-segment>
+  <ion-item>
+    <ion-label>Cancelled</ion-label>
+    <ion-radio value="cancelled" (click)="changeState('cancelled')"></ion-radio>
+  </ion-item>
+</ion-list>
 
-  TEXT B
+<ion-item class="no-margin">
+        <ion-label>Individual recall</ion-label>
+        <ion-toggle (ionChange)="a"></ion-toggle>
+    </ion-item>
+
 
   <p *ngFor="let selectedRace of selectedRaces">
 
@@ -50,10 +58,12 @@ TEXT A
       </ion-card-header>
 
     <ion-card-content>
-        {{ selectedRace.aasm_state | uppercase }} <br/>
-        {{ selectedRace.scheduled_for }} <br/>
-        {{ currentTime }} <br/>
-        {{ selectedRace.ongoingFor }}
+
+<ion-item>
+    <ion-icon color="primary" name="ios-navigate" item-start></ion-icon> <h1> {{ selectedRace.scheduled_for| date: 'HH:mm:ss' }}</h1>
+    <ion-badge>{{ selectedRace.aasm_state | uppercase }} </ion-badge>
+  </ion-item>
+
     </ion-card-content>
 
     <ion-list>
