@@ -14,8 +14,19 @@
   </ion-item>
 
 <ion-item>
+  <ion-label>Scheduled for</ion-label>
+  <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH mm ss"  [(ngModel)]="scheduled_for"></ion-datetime>
+</ion-item>
+
+<ion-item>
   <ion-label>Start Countdown to</ion-label>
-  <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH mm ss"  [ngModel]="startTime">></ion-datetime>
+  <ion-datetime 
+    displayFormat="HH:mm:ss" 
+    pickerFormat="HH mm s" 
+    (ionChange)="updateSelectedRaces()" 
+    initialValue="{{ this.currentTime }}" 
+    [(ngModel)]="started_at">
+    </ion-datetime>
 </ion-item>
 
 <ion-list radio-group>
@@ -23,9 +34,15 @@
     <h1>Race status</h1>
   </ion-list-header>
 
+<ion-item>
+    <ion-label>Scheduled</ion-label>
+    <ion-radio checked="true" value="scheduled" (click)="changeState('scheduled')"></ion-radio>
+  </ion-item>
+
   <ion-item>
-    <ion-label>In progress</ion-label>
-    <ion-radio checked="true" disabled value="in_progress"></ion-radio>
+    <ion-label>In progress {{ ongoingFor }} </ion-label>
+    <ion-radio value="in_progress" (click)="changeState('in_progress')"></ion-radio>
+    <p>TEST</p>
   </ion-item>
 
   <ion-item>

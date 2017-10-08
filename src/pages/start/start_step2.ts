@@ -21,8 +21,11 @@ export class StartStep2Page implements OnInit {
   private timer: any;
   private sub: Subscription;
 
-  public startTime;
+  public started_at: Date;
+  public scheduled_for: Date;
   public currentTime;
+  public ongoingFor;
+  public aasm_state;
 
   constructor(
   	public navCtrl: NavController,
@@ -36,9 +39,10 @@ export class StartStep2Page implements OnInit {
 
     this.storage.get('selectedRaces').then((selectedRaces) => {
       this.selectedRaces = selectedRaces;
+      console.log('selected race');
       console.log(this.selectedRaces[0]);
-
-      this.startTime = this.selectedRaces[0].scheduled_for;
+      this.started_at     = this.selectedRaces[0].started_at;
+      this.scheduled_for = this.selectedRaces[0].scheduled_for;
     });
 
 		this.timer = Observable.timer(0,1000);  
@@ -57,6 +61,17 @@ export class StartStep2Page implements OnInit {
     			races => this.data = races,
     			error => this.errorMessage = <any>error
     		);
+   }
+
+   updateSelectedRaces() {
+     console.log("NOW WE NEED TO UPDATE THE SELECTED RACES!!!");
+     console.log("STARTED_AT: " + this.started_at);
+     console.log("SCHEDULED_FOR: " + this.scheduled_for);
+     console.log("ONGOINGFOR: " + this.ongoingFor);
+     console.log("AASM_STATE: " + this.aasm_state);
+
+     this.selectedRaces[0].started_at = this.started_at;
+     this.updateRace(this.selectedRaces[0]);
    }
 
    updateRace(race) {
