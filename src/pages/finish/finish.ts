@@ -1,6 +1,8 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { RaceService } from '../../services/race.service';
+
 @Component({
   selector: 'page-finish',
   templateUrl: 'finish.html'
@@ -10,8 +12,16 @@ export class FinishPage {
   orig_items: Array<string>;
   items: Array<string>;
 
-  constructor(public navCtrl: NavController) {
+  finishlist: Array<string> = [];
+
+  constructor(
+  	public navCtrl: NavController,
+  	public raceService: RaceService) {
   }
+
+  data: any;
+  errorMessage: any;
+
 
 
   ngOnInit() {
@@ -34,16 +44,25 @@ export class FinishPage {
   }
 
   doClick(event) {
-  	console.log("IS CLICKED!!");
-  	console.log(event);
+  	this.finishlist.push({number: event.value, timestamp: new Date().toISOString()});
   	event.value = null;
   	this.items = [];
   	event.setFocus();
+  	this.doWork();
+  }
+
+  doWork() {
+  	console.log('background http call');
+  	for(let finish of this.finishlist) {
+  		this.raceService.updateRace(finish).subscribe(
+    		races => this.data = races,
+    		error => this.errorMessage = <any>error
+    	);;
+  	}
+  	console.log('done');
   }
 
   doChange(event) {
-  	console.log("CHANGE DETECTED");
-  	console.log(event.value);
   	this.items = this.org_items.filter(item => item.indexOf(event.value) >= 0);
   }
 
