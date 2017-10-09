@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { NavController } from 'ionic-angular';
 import { SettingsPage } from '../settings/settings';
+import { Race } from '../../services/race';
 import { RaceService } from '../../services/race.service';
 import { Storage } from '@ionic/storage';
 
@@ -21,8 +22,8 @@ export class StartStep2Page implements OnInit {
   private timer: any;
   private sub: Subscription;
 
-  public started_at: Date;
-  public scheduled_for: Date;
+  public race: Race = {};
+
   public currentTime;
   public ongoingFor;
   public aasm_state;
@@ -41,8 +42,9 @@ export class StartStep2Page implements OnInit {
       this.selectedRaces = selectedRaces;
       console.log('selected race');
       console.log(this.selectedRaces[0]);
-      this.started_at     = this.selectedRaces[0].started_at;
-      this.scheduled_for = this.selectedRaces[0].scheduled_for;
+      this.race = selectedRaces[0];
+      console.log('the STATE');
+      console.log(this.race.aasm_state);
     });
 
 		this.timer = Observable.timer(0,1000);  
@@ -64,13 +66,10 @@ export class StartStep2Page implements OnInit {
    }
 
    updateSelectedRaces() {
-     console.log("NOW WE NEED TO UPDATE THE SELECTED RACES!!!");
-     console.log("STARTED_AT: " + this.started_at);
-     console.log("SCHEDULED_FOR: " + this.scheduled_for);
-     console.log("ONGOINGFOR: " + this.ongoingFor);
-     console.log("AASM_STATE: " + this.aasm_state);
-
-     this.selectedRaces[0].started_at = this.started_at;
+     this.selectedRaces[0].started_at = this.race.started_at;
+     this.selectedRaces[0].scheduled_for = this.race.scheduled_for;
+     this.selectedRaces[0].aasm_state = this.race.aasm_state;
+     this.selectedRaces[0].individual_recall = this.race.individual_recall;
      this.updateRace(this.selectedRaces[0]);
    }
 
@@ -82,12 +81,8 @@ export class StartStep2Page implements OnInit {
         );
    } 
 
-   changeState(state) {
-     console.log(state);
-     console.log(this.selectedRaces[0]);
-     console.log('--------------------------------------------');
-     this.selectedRaces[0].aasm_state = state;
-     this.updateRace(this.selectedRaces[0]);
+   changeState() {
+     this.updateSelectedRaces();
    }
 
 }

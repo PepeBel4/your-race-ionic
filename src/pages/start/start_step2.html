@@ -13,9 +13,17 @@
     <ion-badge>LOCAL TIME</ion-badge>
   </ion-item>
 
+<form>
+
 <ion-item>
   <ion-label>Scheduled for</ion-label>
-  <ion-datetime displayFormat="HH:mm:ss" pickerFormat="HH mm ss"  [(ngModel)]="scheduled_for"></ion-datetime>
+  <ion-datetime 
+    displayFormat="HH:mm:ss" 
+    pickerFormat="HH mm ss" 
+    (ionChange)="updateSelectedRaces()"  
+    [(ngModel)]="race.scheduled_for"
+    name="scheduled_for">
+  </ion-datetime>
 </ion-item>
 
 <ion-item>
@@ -25,47 +33,49 @@
     pickerFormat="HH mm s" 
     (ionChange)="updateSelectedRaces()" 
     initialValue="{{ this.currentTime }}" 
-    [(ngModel)]="started_at">
+    [(ngModel)]="race.started_at"
+    name="started_at">
     </ion-datetime>
 </ion-item>
 
-<ion-list radio-group>
+<ion-list radio-group [(ngModel)]="race.aasm_state" name="aasm_state">
   <ion-list-header>
     <h1>Race status</h1>
   </ion-list-header>
 
 <ion-item>
     <ion-label>Scheduled</ion-label>
-    <ion-radio checked="true" value="scheduled" (click)="changeState('scheduled')"></ion-radio>
+    <ion-radio value="scheduled" (click)="updateSelectedRaces()"></ion-radio>
   </ion-item>
 
   <ion-item>
     <ion-label>In progress {{ ongoingFor }} </ion-label>
-    <ion-radio value="in_progress" (click)="changeState('in_progress')"></ion-radio>
+    <ion-radio value="in_progress" (click)="updateSelectedRaces()"></ion-radio>
     <p>TEST</p>
   </ion-item>
 
   <ion-item>
     <ion-label>General recall</ion-label>
-    <ion-radio value="recall" (click)="changeState('general_recall')"></ion-radio>
+    <ion-radio value="general_recall" (click)="updateSelectedRaces()"></ion-radio>
   </ion-item>
 
   <ion-item>
     <ion-label>Postponed</ion-label>
-    <ion-radio value="postponed" (click)="changeState('postponed')"></ion-radio>
+    <ion-radio value="postponed" (click)="updateSelectedRaces()"></ion-radio>
   </ion-item>
 
   <ion-item>
     <ion-label>Cancelled</ion-label>
-    <ion-radio value="cancelled" (click)="changeState('cancelled')"></ion-radio>
+    <ion-radio value="cancelled" (click)="updateSelectedRaces()"></ion-radio>
   </ion-item>
 </ion-list>
 
 <ion-item class="no-margin">
         <ion-label>Individual recall</ion-label>
-        <ion-toggle (ionChange)="a"></ion-toggle>
+        <ion-toggle [(ngModel)]="race.individual_recall" name="individual_recall" (ionChange)="updateSelectedRaces()"></ion-toggle>
     </ion-item>
 
+</form>
 
   <p *ngFor="let selectedRace of selectedRaces">
 

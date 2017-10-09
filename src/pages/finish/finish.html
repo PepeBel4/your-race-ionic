@@ -1,11 +1,21 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Finish
-    </ion-title>
+
+  <ion-navbar no-border-bottom>
+    <ion-title>Finish</ion-title>
   </ion-navbar>
+
+  <ion-input #input type="number" maxlength="10" pattern="[0-9]*" autofocus clearInput (input)="doChange(input)"></ion-input>
+
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+
+  <p padding-left padding-right>Searchbars can be placed in a toolbar or anywhere in the content.</p>
+
+  <ion-list>
+    <ion-item *ngFor="let item of items" (click)="doClick(input)">
+      {{ item }}
+    </ion-item>
+  </ion-list>
 
 </ion-content>
