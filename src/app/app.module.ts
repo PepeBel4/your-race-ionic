@@ -23,6 +23,8 @@ import { HttpModule } from '@angular/http';
 
 import { CompetitionService } from '../services/competition.service';
 import { RaceService } from '../services/race.service';
+import { FinishService } from '../services/finish.service';
+
 
 import { Facebook } from '@ionic-native/facebook'
 import { GooglePlus } from '@ionic-native/google-plus'
@@ -101,6 +103,7 @@ export class RavenErrorHandler implements ErrorHandler {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CompetitionService,
     RaceService,
+    FinishService,
     Loader,
     Facebook,
     GooglePlus,

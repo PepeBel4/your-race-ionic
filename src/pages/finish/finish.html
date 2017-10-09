@@ -14,8 +14,8 @@
   </h1>
 
   <ion-list>
-    <ion-item *ngFor="let item of items" (click)="doClick(input)">
-      <h1 style="font-size:40px;padding:20px;">{{ item }}</h1>
+    <ion-item *ngFor="let item of items" (click)="doClick(input,item)">
+      <h1 style="font-size:40px;padding:20px;">{{ item.number }}</h1>
     </ion-item>
   </ion-list>
 

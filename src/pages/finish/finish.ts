@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { RaceService } from '../../services/race.service';
+import { FinishService } from '../../services/finish.service';
 
 @Component({
   selector: 'page-finish',
@@ -16,7 +16,7 @@ export class FinishPage {
 
   constructor(
   	public navCtrl: NavController,
-  	public raceService: RaceService) {
+  	public finishService: FinishService) {
   }
 
   data: any;
@@ -29,7 +29,7 @@ export class FinishPage {
   }
 
   setItems() {
-    this.org_items = ['BEL4', 'BEL77', 'BEL99', 'FRA1', 'FRA4', 'ISR9', 'ISR7', 'JPN1', 'POL4', 'ISR45', 'BEL45'];
+    this.org_items = [{id:1, number:'BEL4'},{id:2, number:'FRA4'}];
   }
 
   filterItems(ev: any) {
@@ -43,27 +43,34 @@ export class FinishPage {
     }
   }
 
-  doClick(event) {
-  	this.finishlist.push({number: event.value, timestamp: new Date().toISOString()});
-  	event.value = null;
+  doClick(input,finish) {
+  	console.log('clickEvent');
+  	console.log(finish);
+  	this.finishlist.push({number: finish.number, timestamp: new Date().toISOString()});
+  	input.value = null;
   	this.items = [];
-  	event.setFocus();
+  	input.setFocus();
   	this.doWork();
   }
 
   doWork() {
-  	console.log('background http call');
+  	console.log(finish);
   	for(let finish of this.finishlist) {
-  		this.raceService.updateRace(finish).subscribe(
-    		races => this.data = races,
+  		this.finishService.registerFinish(finish).subscribe(
+    		finish => this.finishRegistered(finish),
     		error => this.errorMessage = <any>error
     	);;
   	}
-  	console.log('done');
+  }
+
+  finishRegistered(finish) {
+  	console.log('correct. Taking it off');
+  	this.errorMessage = 'OKIDO';
   }
 
   doChange(event) {
-  	this.items = this.org_items.filter(item => item.indexOf(event.value) >= 0);
+  	console.log(event);
+  	this.items = this.org_items.filter(item => item.number.indexOf(event.value) >= 0);
   }
 
 
