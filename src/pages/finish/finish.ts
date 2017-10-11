@@ -54,6 +54,9 @@ export class FinishPage {
   }
 
   doChange(event) {
+  	console.log(this.competitors);
+  	console.log('here');
+  	console.log(event);
     	this.items = this.competitors.filter(item => item.number.indexOf(event.value) >= 0);
   }
 
