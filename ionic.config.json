@@ -1,6 +1,6 @@
 {
   "name": "your-race-ionic",
-  "app_id": "",
+  "app_id": "21e698a6",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

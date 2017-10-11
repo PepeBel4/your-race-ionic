@@ -19,9 +19,7 @@ export class RaceService  {
 
     getRacesOpen(): Observable<Race[]> {
 
-    	console.log("GETTING THE RACES!!!!!!!!!");
-
-		return this.authHttp.get(this.apiUrl + 'races/open')
+    	return this.authHttp.get(this.apiUrl + 'races/open')
 						.map((response: Response) => <Race[]>response.json())
 						.catch(this.handleError);
 	}

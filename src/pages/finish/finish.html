@@ -14,9 +14,15 @@
   </h1>
 
   <ion-list>
-    <ion-item *ngFor="let item of items" (click)="doClick(input,item)">
-      <h1 style="font-size:40px;padding:20px;">{{ item.number }}</h1>
+    <p *ngFor="let item of items">
+    <ion-item (click)="doClick(input,item)">
+      {{ item.number }}
+      <ion-note item-end>{{ item.group.name }}</ion-note>
     </ion-item>
+    <ion-item-divider>
+  {{item.name}}
+</ion-item-divider>
+    </p>
   </ion-list>
 
 </ion-content>

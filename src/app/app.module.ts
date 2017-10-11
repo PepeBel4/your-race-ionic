@@ -22,6 +22,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 
 import { CompetitionService } from '../services/competition.service';
+import { CompetitorService } from '../services/competitor.service';
 import { RaceService } from '../services/race.service';
 import { FinishService } from '../services/finish.service';
 
@@ -102,6 +103,7 @@ export class RavenErrorHandler implements ErrorHandler {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CompetitionService,
+    CompetitorService,
     RaceService,
     FinishService,
     Loader,
