@@ -186,7 +186,7 @@ export class AuthenticatorService {
     return promise;
   }
 
-  private saveUserDetails(user: any): firebase.Promise<any> {
+  private saveUserDetails(user: any): Promise<any> {
     let userRef = firebase.database().ref('users/' + user.uid)
     return userRef.once('value', (data) => {
       if (!data.val()) {

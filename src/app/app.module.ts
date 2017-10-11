@@ -42,6 +42,8 @@ import { RegistrationPage } from '../pages/authentication/registration/registrat
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
 
+import { Geolocation } from '@ionic-native/geolocation'; 
+
 import * as Raven from 'raven-js';
 
 import { IonicStorageModule } from '@ionic/storage'
@@ -99,6 +101,7 @@ export class RavenErrorHandler implements ErrorHandler {
 
   ],
   providers: [
+    Geolocation,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
