@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { CompetitorService } from '../../services/competitor.service';
