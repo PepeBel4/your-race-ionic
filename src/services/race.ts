@@ -11,6 +11,7 @@ export class Race {
 		public sub_state?: string,
 		public metrics?: string,
 		public race_competitors?: string,
-		public race_scorings?: string
+		public race_scorings?: string,
+		public individual_recall?: boolean
 	) {}
 }

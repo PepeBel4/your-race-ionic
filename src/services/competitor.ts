@@ -2,10 +2,10 @@ export class Competitor {
 	constructor(
 		public id:			number,
 		public number: 		string,
+		public group_id: 	number,
 		public name?: 		number,
 		public email?: 		string,
 		public country?: 	string,
-		public group_id: 	number,
 		public sailor_id?: 	string
 	) {}
 }

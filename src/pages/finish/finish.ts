@@ -2,6 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { CompetitorService } from '../../services/competitor.service';
+import { Competitor } from '../../services/competitor';
 import { FinishService } from '../../services/finish.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class FinishPage {
 
   items: Array<Competitor>;
   competitors: Array<Competitor> = [];
-  finishlist: Array<string> = [];
+  finishlist: Array<any> = [];
 
   constructor(
   	public navCtrl: NavController,
@@ -25,17 +26,6 @@ export class FinishPage {
 
   ngOnInit() {
     this.getCompetitors();
-  }
-
-  filterItems(ev: any) {
-    this.setItems();
-    let val = ev.target.value;
-
-    if (val && val.trim() !== '') {
-      this.items = this.items.filter(function(item) {
-        return item.toLowerCase().includes(val.toLowerCase());
-      });
-    }
   }
 
   doClick(input,competitor) {
