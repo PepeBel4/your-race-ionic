@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Observable, Subscription } from 'rxjs/Rx';
 import { NavController } from 'ionic-angular';
 
 import { CompetitorService } from '../../services/competitor.service';
@@ -22,6 +23,10 @@ export class FinishPage {
   options : GeolocationOptions;
   currentPos : Geoposition;
 
+   private timer: any;
+   private sub: Subscription;
+
+
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
@@ -37,6 +42,8 @@ export class FinishPage {
 
   ngOnInit() {
     this.getCompetitors();
+    this.timer = Observable.timer(2500,3000);  
+    this.sub = this.timer.subscribe(() => this.getUserPosition());
   }
 
   getUserPosition(){
