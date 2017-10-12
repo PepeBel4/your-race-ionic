@@ -29,6 +29,7 @@ export class FinishPage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  marker: any;
 
   constructor(
   	public navCtrl: NavController,
@@ -42,13 +43,34 @@ export class FinishPage {
 
   ngOnInit() {
     this.getCompetitors();
-    this.timer = Observable.timer(2500,3000);  
-    this.sub = this.timer.subscribe(() => this.getUserPosition());
+    this.timer = Observable.timer(5000,500);  
+    this.sub = this.timer.subscribe(() => this.changeMarkerPosition());
   }
+
+  changeMarkerPosition() {
+
+
+    this.options = {
+      enableHighAccuracy : true
+    };
+    
+    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+
+        this.currentPos = pos;     
+
+        console.log(pos);
+        var latlng = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+        this.marker.setPosition(latlng);
+        
+      },(err : PositionError)=>{
+        console.log("error : " + err.message);
+      ;
+      })
+    }
 
   getUserPosition(){
     this.options = {
-    enableHighAccuracy : false
+    enableHighAccuracy : true
     };
     this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
@@ -84,7 +106,7 @@ addMap(lat,long) {
 
 addMarker(){
 
-    let marker = new google.maps.Marker({
+    this.marker = new google.maps.Marker({
     map: this.map,
     animation: google.maps.Animation.DROP,
     position: this.map.getCenter()
@@ -95,8 +117,8 @@ addMarker(){
     content: content
     });
 
-    google.maps.event.addListener(marker, 'click', () => {
-    infoWindow.open(this.map, marker);
+    google.maps.event.addListener(this.marker, 'click', () => {
+    infoWindow.open(this.map, this.marker);
     });
 
 }
