@@ -49,12 +49,7 @@ export class FinishPage {
 
   changeMarkerPosition() {
 
-
-    this.options = {
-      enableHighAccuracy : true
-    };
-    
-    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+    this.geolocation.getCurrentPosition().then((pos : Geoposition) => {
 
         this.currentPos = pos;     
 
@@ -70,7 +65,8 @@ export class FinishPage {
 
   getUserPosition(){
     this.options = {
-    enableHighAccuracy : true
+    enableHighAccuracy : true,
+    maximumAge : 0
     };
     this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
