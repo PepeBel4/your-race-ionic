@@ -8,6 +8,9 @@ import { FinishService } from '../../services/finish.service';
 
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation';
 
+//PubNub
+import { PubNubAngular } from 'pubnub-angular2';
+
 declare var google;
 
 @Component({
@@ -35,7 +38,17 @@ export class FinishPage {
   	public navCtrl: NavController,
     public competitorService: CompetitorService,
   	public finishService: FinishService,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation,
+    private pubnubService: PubNubAngular
+   ) {
+
+    console.log("WILL NOW INIT PUBNUB!!!!");
+    pubnubService.init({
+      publishKey: 'pub-c-b06ac705-6638-4946-af1f-da17d43c519e',
+      subscribeKey: 'sub-c-f2672bfe-a75e-11e7-ad87-6e294738eb45',
+    });
+    console.log("INIT DONE!!");
+
   }
 
   data: any;
@@ -43,7 +56,7 @@ export class FinishPage {
 
   ngOnInit() {
     this.getCompetitors();
-    this.timer = Observable.timer(5000,500);  
+    this.timer = Observable.timer(5000,5000);  
     this.sub = this.timer.subscribe(() => this.changeMarkerPosition());
   }
 
@@ -56,6 +69,24 @@ export class FinishPage {
         console.log(pos);
         var latlng = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
         this.marker.setPosition(latlng);
+
+        //send it through PubNub
+    console.log("Going to send a message!!");
+    this.pubnubService.publish(
+    {
+        message: {such: 'Hello!'},
+        channel: 'races-1'
+    },
+    (status, response) => {
+        if (status.error) {
+            console.log(status);
+        } else {
+            console.log('message Published w/ timetoken', response.timetoken);
+        }
+    }
+);
+    console.log("The message has been sent!");
+
         
       },(err : PositionError)=>{
         console.log("error : " + err.message);

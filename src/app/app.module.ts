@@ -47,6 +47,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import * as Raven from 'raven-js';
 
 import { IonicStorageModule } from '@ionic/storage'
+
+import { PubNubAngular } from 'pubnub-angular2';
  
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -101,6 +103,7 @@ export class RavenErrorHandler implements ErrorHandler {
 
   ],
   providers: [
+    PubNubAngular,
     Geolocation,
     StatusBar,
     SplashScreen,
